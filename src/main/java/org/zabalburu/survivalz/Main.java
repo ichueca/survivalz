@@ -2,6 +2,7 @@ package org.zabalburu.survivalz;
 
 import java.util.Scanner;
 
+import org.zabalburu.ichueca.terminalUtils.utils.TerminalANSI;
 import org.zabalburu.survivalz.domain.Personaje;
 
 public class Main {
@@ -12,11 +13,14 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("""
+        
+        System.out.println(TerminalANSI.CYAN +"""
             =========================
-                   SURVIVAL Z
+                   SURVIVAL Z 
             =========================
-        """);
+        """ + TerminalANSI.RESET);
+        
+        
 
         System.out.println("Nombre");
         String nombre = sc.nextLine();
@@ -57,6 +61,8 @@ public class Main {
                 botiquines = Personaje.BOTIQUINES_INICIALES_POLICIA;
                 break;
         }
+
+
 
         Personaje personaje = new Personaje(
                 nombre,
