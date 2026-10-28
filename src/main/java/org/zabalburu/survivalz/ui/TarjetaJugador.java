@@ -33,7 +33,7 @@ public class TarjetaJugador {
 
         dibujarMarco();
 
-        escribir(6,3,"");
+        escribir(6,5,"");
         System.out.flush();
         visor.mostrar("imagenes/superviviente.png");
 
