@@ -33,9 +33,8 @@ public class TarjetaJugador {
 
         dibujarMarco();
 
-        //escribir(6,3,"");
-        System.out.print(TerminalANSI.goTo(6, 3));
-        //System.out.flush();
+        escribir(6,3,"");
+        System.out.flush();
         visor.mostrar("imagenes/superviviente.png");
 
         escribir(
@@ -160,7 +159,7 @@ public class TarjetaJugador {
     }
 
     private void escribir(int fila, int columna, String texto){
-        System.out.println(
+        System.out.print(
             TerminalANSI.goTo(fila, columna) +
             texto
         );

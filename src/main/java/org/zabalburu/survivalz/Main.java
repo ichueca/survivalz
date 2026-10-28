@@ -5,6 +5,7 @@ import java.util.Scanner;
 import org.zabalburu.ichueca.terminalUtils.utils.TerminalANSI;
 import org.zabalburu.survivalz.domain.Personaje;
 import org.zabalburu.survivalz.domain.Zombie;
+import org.zabalburu.survivalz.ui.PantallaDia;
 import org.zabalburu.survivalz.ui.TarjetaJugador;
 
 public class Main {
@@ -12,9 +13,10 @@ public class Main {
     public static final int TIPO_MEDICO = 1;
     public static final int TIPO_POLICIA = 2;
     public static final int TIPO_BOMBERO = 3;
+    private static final int TOTAL_DIAS = 5;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner teclado = new Scanner(System.in);
         
         System.out.println(TerminalANSI.CYAN +"""
             =========================
@@ -25,7 +27,7 @@ public class Main {
         
 
         System.out.println("Nombre");
-        String nombre = sc.nextLine();
+        String nombre = teclado.nextLine();
         System.out.println("""
            Selecciona una clase:
 
@@ -34,8 +36,8 @@ public class Main {
             3️⃣ Bombero 
             
         """);
-        int tipo = sc.nextInt();
-        sc.nextLine();
+        int tipo = teclado.nextInt();
+        teclado.nextLine();
 
         int vida;
         int habilidad;
@@ -75,9 +77,14 @@ public class Main {
 
         TarjetaJugador tj = new TarjetaJugador();
         tj.mostrarPersonaje(personaje);
+        System.out.println("Pulsa INTRO para comenzar la aventura...");
+        teclado.nextLine();
 
-        for (int i=0; i<5; i++) {
-            System.out.println(new Zombie());
+        PantallaDia pantallaDia = new PantallaDia();
+
+        for(int dia=1; dia <= TOTAL_DIAS; dia++){
+            pantallaDia.mostrar(dia, TOTAL_DIAS);
+            teclado.nextLine();
         }
 
     }
