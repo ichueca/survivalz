@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import org.zabalburu.ichueca.terminalUtils.utils.TerminalANSI;
 import org.zabalburu.survivalz.domain.Personaje;
+import org.zabalburu.survivalz.domain.Zombie;
+import org.zabalburu.survivalz.ui.TarjetaJugador;
 
 public class Main {
 
@@ -71,19 +73,12 @@ public class Main {
                 habilidad,
                 botiquines);
 
-        System.out.println(
-        """
-            Nombre      : %s
-            Tipo        : %s
-            Vida        : %d
-            Habilidad   : %d
-            Botiquines  : %d
-        """.formatted(
-            personaje.getNombre(),
-            personaje.getTipo(),
-            personaje.getVida(),
-            personaje.getHabilidad(),
-            personaje.getBotiquines()
-        ));
+        TarjetaJugador tj = new TarjetaJugador();
+        tj.mostrarPersonaje(personaje);
+
+        for (int i=0; i<5; i++) {
+            System.out.println(new Zombie());
+        }
+
     }
 }
