@@ -68,7 +68,7 @@ public class PantallaDia {
             "┌" + "─".repeat(88) + "┐" +
             TerminalANSI.RESET
         );
-        for(int fila=4; fila<25; fila++){
+        for(int fila=4; fila<=25; fila++){
             escribir(
                 fila,
                 3,
@@ -83,7 +83,7 @@ public class PantallaDia {
                 TerminalANSI.RESET);
         }
         escribir(
-            24,
+            26,
             3,
             TerminalANSI.CYAN +
             "└" + "─".repeat(88) + "┘" +
