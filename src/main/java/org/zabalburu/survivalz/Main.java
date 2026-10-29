@@ -31,9 +31,9 @@ public class Main {
         System.out.println("""
            Selecciona una clase:
 
-            1️⃣ Médico
-            2️⃣ Policía
-            3️⃣ Bombero 
+            1️⃣  Médico
+            2️⃣  Policía
+            3️⃣  Bombero 
             
         """);
         int tipo = teclado.nextInt();
@@ -84,8 +84,56 @@ public class Main {
 
         for(int dia=1; dia <= TOTAL_DIAS; dia++){
             pantallaDia.mostrar(dia, TOTAL_DIAS);
+            mostrarEstado(personaje);
+            teclado.nextLine();
+            realizarMisionesDiarias(dia);
             teclado.nextLine();
         }
 
     }
+
+    private static void mostrarEstado(Personaje personaje) {
+        if (personaje.getVida() < 30){
+            System.out.println("🚨  ESTADO CRÍTICO");
+        } else if (personaje.getVida() < 70){
+            System.out.println("⚠️  HERIDO");
+        } else {
+            System.out.println("✅  ESTABLE");
+        }
+        System.out.println("🩹  Botiquines: %d".formatted(personaje.getBotiquines()));
+    }
+
+    private static String obtenerNombreMision(){
+        int opcion = (int) (Math.random() * 2) + 1;
+        return switch(opcion){
+            case 1 -> "Combatir zombis";
+            default -> "Explorar vivienda";
+        };
+    }
+
+    private static int generarPuntosMision() {
+        return (int) (Math.random() * 21) + 10;
+    }
+
+    private static void realizarMisionesDiarias(int dia) {
+        int puntos = 0;
+
+        System.out.println();
+        System.out.println("📆  DÍA " + dia);
+        System.out.println("Objetivo: conseguir 100 puntos.");
+        System.out.println();
+        do {
+            String mision = obtenerNombreMision();
+            int puntosMision = generarPuntosMision();
+
+            puntos += puntosMision;
+
+            System.out.println("Misión: " + mision);
+            System.out.println("Puntos obtenidos: " + puntosMision);
+            System.out.println("Puntos acumulados: %d / 100".formatted(puntos ));
+            System.out.println();
+        } while (puntos <= 100);
+        System.out.println("🎯  ¡Objetivo diario conseguido!");
+    }
+
 }
