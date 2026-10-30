@@ -6,6 +6,7 @@ import org.zabalburu.ichueca.terminalUtils.utils.TerminalANSI;
 import org.zabalburu.survivalz.domain.Personaje;
 import org.zabalburu.survivalz.domain.Zombie;
 import org.zabalburu.survivalz.ui.PantallaDia;
+import org.zabalburu.survivalz.ui.PantallaMision;
 import org.zabalburu.survivalz.ui.TarjetaJugador;
 
 public class Main {
@@ -81,12 +82,22 @@ public class Main {
         teclado.nextLine();
 
         PantallaDia pantallaDia = new PantallaDia();
+        PantallaMision pantallaMision = new PantallaMision();
 
         for(int dia=1; dia <= TOTAL_DIAS; dia++){
             pantallaDia.mostrar(dia, TOTAL_DIAS);
             mostrarEstado(personaje);
             teclado.nextLine();
-            realizarMisionesDiarias(dia);
+            realizarMisionesDiarias(
+                pantallaMision,
+                personaje,
+                dia,
+                TOTAL_DIAS,
+                teclado
+            );
+            System.out.println();
+            System.out.println("Pulsa INTRO para terminar la jornada...");
+            System.out.flush();
             teclado.nextLine();
         }
 
@@ -115,25 +126,34 @@ public class Main {
         return (int) (Math.random() * 21) + 10;
     }
 
-    private static void realizarMisionesDiarias(int dia) {
+    private static void realizarMisionesDiarias(
+        PantallaMision pantallaMision, 
+        Personaje personaje,
+        int dia,
+        int totalDias,
+        Scanner teclado) {
+        
         int puntos = 0;
-
-        System.out.println();
-        System.out.println("📆  DÍA " + dia);
-        System.out.println("Objetivo: conseguir 100 puntos.");
-        System.out.println();
+        final int OBJETIVO_DIARIO = 100;
+        
         do {
             String mision = obtenerNombreMision();
             int puntosMision = generarPuntosMision();
-
+            
             puntos += puntosMision;
 
-            System.out.println("Misión: " + mision);
-            System.out.println("Puntos obtenidos: " + puntosMision);
-            System.out.println("Puntos acumulados: %d / 100".formatted(puntos ));
-            System.out.println();
+            pantallaMision.mostrar(
+                personaje, 
+                dia,
+                totalDias, 
+                mision, 
+                puntosMision, 
+                puntos, 
+                OBJETIVO_DIARIO);
+
+            teclado.nextLine();
         } while (puntos <= 100);
-        System.out.println("🎯  ¡Objetivo diario conseguido!");
+        
     }
 
 }
